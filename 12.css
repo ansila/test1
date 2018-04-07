@@ -1,0 +1,10 @@
+li:nth-child(even){
+background-color: #052f66;
+color: white;
+width: 150px;
+font-size: 20px;
+}
+li:nth-child(odd){
+background:white;
+    color: #052f66;
+}
