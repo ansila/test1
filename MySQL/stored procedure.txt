@@ -1,0 +1,49 @@
+
+Delimiter //
+create procedure getName(IN roll_no int)
+    BEGIN
+         select * from tbl_student where roll_no=roll_no;
+END//
+Delimiter ;
+
+
+
+Delimiter //
+create procedure getsale(IN id int,out sale int,out x int)
+  begin
+      select sum(int_price)into sale from tbl_stock where pk_int_stock_id>id;
+	 select avg(int_price)into x from tbl_stock where pk_int_stock_id>id;
+
+end //
+Delimiter ;
+
+
+
+
+call getSSale(1,@sale,@x);
+select @sale;
+select @x;
+
+
+Delimiter //
+
+   create procedure csp_getSalary(iN id int)
+Begin
+select emp_name,int_salary from tbl_emp where emp_id=id;
+end //
+Delimiter ;
+
+
+Drop procedure csp_getsalaryAtPlace;
+Delimiter //
+    create procedure csp_getsalaryAtPlace(IN x varchar(20),out total int)
+Begin
+select sum(int_salary) into total from tbl_emp where vchr_palce= x;
+end //
+Delimiter ;
+call csp_getsalaryAtPlace('calicut', @total);
+
+
+
+
+Csp_getSalaryAtPlace('calicut',@total)

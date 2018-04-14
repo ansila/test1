@@ -1,0 +1,85 @@
+asmt 1 joins
+
+
+
+create table tbl_student
+(
+enroll_no int,
+roll_no int,
+name varchar(255),
+city varchar(255),
+mob int,
+dob date
+);
+
+
+
+
+
+create table tbl_grade
+(
+roll_no int,
+course varchar(255),
+grade varchar(255)
+);
+
+
+
+
+
+
+INSERT INTO tbl_student VALUES('11','2','Akhil','Delhi','98756579','12-01-1986'),('6','4','Maya','Banglore','98756579','12-11-1987'),('1','8','Anoop','Banglore','98770579','11-01-1986'),
+('20','1','Paul','Cochin','98656570','12-01-1991'),('3','5','Sandeep','Delhi','84650912','14-06-1993');
+
+
+
+INSERT INTO tbl_grade VALUES('2','c','A'),('2','Java','B'),('1','c','B'),('1','Java','A'),('4','PHP','A'),('4','Java','A'),('4','c','B'),('8','Java','B'),('5','PHP','A'),('5','Java','D');
+
+
+
+
+
+
+
+update tbl_student SET dob='1986-01-12'  where name='Akhil';
+
+
+
+update tbl_student SET dob='1987-11-12'  where name='Maya';
+
+
+
+update tbl_student SET dob='1986-01-11'  where name='Anoop';
+
+update tbl_student SET dob='1991-01-12'  where name='Paul';
+
+
+update tbl_student SET dob='1993-06-14'  where name='Sandeep';
+
+
+
+select name,course from tbl_student st join tbl_grade gd on st.roll_no=gd.roll_no where gd.grade='A';
+
+select name,course,grade from tbl_student st join tbl_grade gd on st.roll_no=gd.roll_no where gd.grade='B';
+
+
+
+select st.roll_no,st.name,count(gd.course)from tbl_student st join tbl_grade gd on st.roll_no=gd.roll_no group by gd.roll_no;
+
+select st.roll_no,st.name, course from tbl_student st join tbl_grade gd on st.roll_no=gd.roll_no ;
+
+
+
+
+
+
+
+select name,course from tbl_student st join tbl_grade gd on st.roll_no=gd.roll_no where gd.grade='A';
+
+
+
+
+
+
+
+

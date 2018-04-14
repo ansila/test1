@@ -1,0 +1,260 @@
+CREATE TABLE persons
+(
+personID int auto_increment,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255),
+Primary Key(personID)
+);
+
+
+
+ALTERING A TABLE
+
+
+alter table PERSONS add EMAIL varchar(60);
+
+
+alter table PERSONS drop CITY;
+
+alter table PERSONS change FirstName FullName varchar(20);
+
+
+
+INSERTION
+
+
+INSERT INTO persons(CustomerName,City,Country)VALUES('baabtra','calicut','india')
+
+
+
+TO see INSERTED DATA
+
+
+select * from persons;
+select fullname from persons;
+select * from  persons addres='calicut';
+
+
+update query
+
+UDATE PERSONS
+SET fullname='ipix'  where fullname='baabte';
+
+
+DELETE QUERY
+
+delete from persons where fullname='baabtra' address='calicut' email='india'; 
+
+
+
+
+asmt 4
+
+
+alter table tbl_stock add fk_int_supplier int;
+
+asmt5
+
+alter table tbl_stock
+add foreign key(fk_int_supplier) references tbl_supplier(pk_int_supplier_id);
+
+
+
+asmt6
+
+
+
+create table tbl_dpt
+(
+pk_int_dpt_id int auto_increment,
+vchr_dpt_name varchar(255),
+primary key(pk_int_dpt_id)
+);
+
+
+asmt 7
+
+create table tbl_classes
+(
+pk_int_class_id int auto_increment,
+vchr_class_name varchar(255),
+fk_int_dpt_id int,
+primary key(pk_int_class_id),
+foreign key(fk_int_dpt_id) references tbl_dpt(pk_int_dpt_id)
+);
+
+
+
+
+
+asmt8
+
+create table tbl_enrollment
+(
+pk_int_enrollment_id int auto_increment,
+int_count int,
+fk_int_class_id int,
+primary key(pk_int_enrollment_id),
+foreign key(fk_int_class_id)references tbl_classes(pk_int_class_id)
+
+);
+
+
+
+
+asmt9
+
+
+alter table tbl_classes add constraint unique(vchr_class_name);
+
+
+asmt10
+
+
+alter table tbl_dpt add vchr_dept_description varchar(20);
+
+
+
+asmt11
+INSERT INTO tbl_supplier(vchr_supplier_name)VALUES('logitech'),('samsung'),('iball'),('lg'),('creative');
+
+UPDATE tbl_stock
+SET int_price =int_price +1.5;
+
+
+
+DML
+
+asmt12
+
+INSERT INTO tbl_stock(vchr_name,int_quantity, int_price,fk_int_supplier)
+VALUES('mouse','10','500','1'),('keyboard','5','450','3'),('modem','10','1200','2'),('memory','100','1500','5'),('headphone','50','750','4'),('memory','2','3500','4');
+
+
+
+
+DML4
+
+select * from tbl_stock order by vchr_name asc;
+
+DML5
+
+
+SELECT * FROM tbl_stock ORDER BY vchr_name LIMIT 3; 
+
+
+DML 6
+
+
+
+
+SELECT * FROM (
+  SELECT * FROM tbl_stock ORDER BY vchr_name DESC LIMIT 3
+) as r ORDER BY vchr_name;
+
+
+dml7
+select *,int_price*int_quantity from tbl_stock;
+select vchr_name,int_quantity,int_price,int_price*int_quantity from tbl_stock;
+select vchr_name,int quantity,int price,int_price*int_quantity as total from tbl_stock;
+
+
+dml9
+
+INSERT INTO tbl_dpt(vchr_dpt_name, vchr_dept_description)
+VALUES('computer science','CS'),('electronics','EC'),('commerce','CC'),('Arts','AR');
+
+
+
+
+Aggregate fns
+
+
+
+
+select avg(int_price)from tbl_stock;
+
+select sum(int_price)from tbl_stock;
+
+select min(int_price)from tbl_stock;
+
+select count(int_price)from tbl_stock;
+
+
+sql fns
+
+select ucase(vchr_name)from tbl_stock;
+select lcase(vchr_name)from tbl_stock;
+select round(int_price)from tbl_stock;
+
+Grouping
+
+
+create table tbl_emp
+(
+emp_id int auto_increment,
+emp_name varchar(255),
+emp_age int,
+emp_email varchar(255),
+int_salary int,
+vchr_palce varchar(255),
+primary key(emp_id)
+);
+
+
+
+INSERT INTO tbl_emp VALUES(1000,'Deepak','24','dk@gmail.com','10000','cochin'),(null,'Aneesh','23','an@gmail.com','20000','Calicut'),(null,'Naveen','25','nn@gmail.com','15000','cochin'),(null,'Jacob','jb@gmail.com','25','13000','Calicut');
+
+select vchr_palce,avg(int_salary)from tbl_emp group by vchr_palce;
+select vchr_palce,avg(int_salary)from tbl_emp group by vchr_palce having avg(int_salary)>12000;
+
+
+
+
+
+
+
+
+
+
+
+INNER JOIN
+
+create table tbl_employee
+(
+emp_id int auto_increment,
+emp_name varchar(20),
+fk_int_place_id int,
+primary key(emp_id)
+)auto_increment=1000;
+
+create table tbl_place
+(
+pk_id int auto_increment,
+vchr_place varchar(255),
+primary key(pk_id)
+);
+
+
+INSERT INTO tbl_employee VALUES(null,'Deepak','1'),(null,'Aneesh','3'),(null,'Naveen','2'),(null,'Jacob','5');
+insert into tbl_place values(null,'cochin'),(null,'banglore'),(null,'kolkatta'),(null,'mumbai');
+
+
+
+
+select emp_id,emp_name,vchr_place from tbl_employee join tbl_place on fk_int_place_id=pk_id;
+
+
+
+
+select emp_id,emp_name,vchr_place from tbl_employee left join tbl_place on fk_int_place_id=pk_id;
+
+
+insert into tbl_employee values(null,'alex',6);
+
+OUTER JOIN
+
+select emp_id,emp_name,vchr_place from tbl_employee right join tbl_place on fk_int_place_id=pk_id;
+
+select
